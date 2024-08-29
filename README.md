@@ -47,6 +47,8 @@ Developed a script that parses through a flow log file that maps each row to a t
     ```
     python flow_log_parser.py
     ```
+  * The output file will be located inside the `output_files` folder with the name `output.txt`
+     
 * ### On Mac
   * First, open your terminal
   * Second, navigate to the `illumio-assessment` directory
@@ -57,6 +59,7 @@ Developed a script that parses through a flow log file that maps each row to a t
     ```
     python3 flow_log_parser.py
     ```
+  * The output file will be located inside the `output_files` folder with the name `output.txt`
     
 ### Unit Tests using the `unittest` standard library
 * All 9 unit tests passed, and a brief description of what each unit test is testing is included below
