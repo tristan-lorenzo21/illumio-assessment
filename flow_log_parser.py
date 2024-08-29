@@ -1,5 +1,18 @@
 import csv, os
 
+def ascii_check(filename):
+    """
+    Checks if the inputted file is in plain-text
+    ascii format
+    """
+
+    try:
+        with open(filename, 'r') as file:
+            content = file.read()
+            return content.isascii()
+    except UnicodeDecodeError:
+        return False
+
 def get_parsed_log(input_file):
     """
     Takes the flow log file and returns it as 
@@ -9,6 +22,9 @@ def get_parsed_log(input_file):
     parsed_log = []
 
     try: 
+        if ascii_check(input_file) == False:
+            return(f'{input_file} is not in plain text ascii format')
+
         # check if file size is above 10 mb
         file_size = os.path.getsize(input_file)
 
@@ -52,6 +68,9 @@ def get_lookup_table(lookup_table_file):
     lookup_table = {}
 
     try: 
+        if ascii_check(lookup_table_file) == False:
+            return(f'{lookup_table_file} is not in plain text ascii format')
+
         with open(lookup_table_file, 'r') as file:
             csv_reader = csv.DictReader(file)
 
@@ -137,6 +156,6 @@ def get_output_file(tag_counts, combination_counts):
         
         print("Successfully printed output file.")
 
-# tag_counts = get_tag_counts(get_parsed_log('input_files/input.txt'), get_lookup_table('input_files/lookup_table.txt'))
+# tag_counts = get_tag_counts(get_parsed_log('input_files/ascii.txt'), get_lookup_table('input_files/lookup_table.txt'))
 # combination_counts = get_combination_counts(get_parsed_log('input_files/input.txt'))
 # get_output_file(tag_counts, combination_counts)
