@@ -58,5 +58,24 @@ Developed a script that parses through a flow log file that maps each row to a t
     python3 flow_log_parser.py
     ```
     
-### Test Cases
+### Unit Tests using the `unittest` standard library
+* All 9 unit tests passed, and a brief description of what each unit test is testing is included below
+1. `test_get_parsed_log`
+   * Description: Checks if get_parsed_log correctly parses the flow log and extracts destination ports and protocols.
+2. `test_get_lookup_table`
+   * Description: Verifies that get_lookup_table reads and converts the CSV file into the expected dictionary.
+3. `test_get_tag_counts`
+   * Description: Confirms that get_tag_counts accurately counts tags from the parsed log using the lookup table.
+4. `test_get_combination_counts`
+   * Description: Ensures get_combination_counts counts occurrences of (port, protocol) combinations in the log.
+5. `test_invalid_log_file`
+    * Description: Tests if get_parsed_log handles files larger than 10 MB correctly.
+6. `test_missing_log_file`
+    * Description: Checks if get_parsed_log handles missing log files properly.
+7. `test_missing_lookup_table_file`
+    * Description: Checks if get_lookup_table handles missing lookup table files properly.
+8. `test_ascii_check_log`
+    * Description: Ensures get_parsed_log detects non-ASCII files.
+9. `test_ascii_check_lookup_table`
+    * Description: Ensures get_lookup_table detects non-ASCII files.
 
