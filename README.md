@@ -9,7 +9,6 @@ Developed a script that parses through a flow log file that maps each row to a t
 
 ### Dependencies
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
 * Ran on Python version - 3.10.4
 * Used the following Python standard libraries
   - unittest
@@ -62,6 +61,7 @@ Developed a script that parses through a flow log file that maps each row to a t
   * The output file will be located inside the `output_files` folder with the name `output.txt`
     
 ### Unit Tests using the `unittest` standard library
+
 * All 9 unit tests passed, and a brief description of what each unit test is testing is included below
 1. `test_get_parsed_log`
    * Description: Checks if get_parsed_log correctly parses the flow log and extracts destination ports and protocols.
