@@ -83,5 +83,19 @@ class TestLogProcessing(unittest.TestCase):
 
         self.assertEqual(result, expected)
 
+    def test_ascii_check_log(self):
+        result = get_parsed_log('input_files/ascii.txt')
+
+        expected = 'input_files/ascii.txt is not in plain text ascii format'
+
+        self.assertEqual(result, expected)
+
+    def test_ascii_check_lookup_table(self):
+        result = get_lookup_table('input_files/ascii.txt')
+
+        expected = 'input_files/ascii.txt is not in plain text ascii format'
+
+        self.assertEqual(result, expected)
+
 if __name__ == '__main__':
     unittest.main()
