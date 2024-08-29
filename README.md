@@ -16,7 +16,7 @@ Developed a script that parses through a flow log file that maps each row to a t
   - csv
   - textwrap
   
-### Installing
+### Installation Instructions
 
 * How/where to download your program
 * Any modifications needed to be made to files/folders
