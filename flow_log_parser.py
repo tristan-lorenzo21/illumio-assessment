@@ -156,6 +156,6 @@ def get_output_file(tag_counts, combination_counts):
         
         print("Successfully printed output file.")
 
-# tag_counts = get_tag_counts(get_parsed_log('input_files/ascii.txt'), get_lookup_table('input_files/lookup_table.txt'))
-# combination_counts = get_combination_counts(get_parsed_log('input_files/input.txt'))
-# get_output_file(tag_counts, combination_counts)
+tag_counts = get_tag_counts(get_parsed_log('input_files/input.txt'), get_lookup_table('input_files/lookup_table.txt'))
+combination_counts = get_combination_counts(get_parsed_log('input_files/input.txt'))
+get_output_file(tag_counts, combination_counts)
