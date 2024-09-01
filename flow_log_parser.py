@@ -1,4 +1,23 @@
-import csv, os
+import csv
+import os
+
+def get_protocol_map(protocol_file):
+    """
+    Returns a dictionary of the number-protocol.csv
+    """
+
+    protocol_map = {}
+
+    try:
+        with open(protocol_file, "r") as file:
+            csv_reader = csv.DictReader(file)
+
+            for row in csv_reader:
+                protocol_map[int(row["Decimal"])] = row["Keyword"].lower()
+
+        return protocol_map
+    except FileNotFoundError:
+        return f"File {protocol_file} not found"
 
 def ascii_check(filename):
     """
@@ -13,7 +32,7 @@ def ascii_check(filename):
     except UnicodeDecodeError:
         return False
 
-def get_parsed_log(input_file):
+def get_parsed_log(input_file, protocol_map):
     """
     Takes the flow log file and returns it as 
     a parseable array.
@@ -22,7 +41,7 @@ def get_parsed_log(input_file):
     parsed_log = []
 
     try: 
-        if ascii_check(input_file) == False:
+        if ascii_check(input_file) is False:
             return(f'{input_file} is not in plain text ascii format')
 
         # check if file size is above 10 mb
@@ -41,14 +60,13 @@ def get_parsed_log(input_file):
 
                     protocol_keyword = ''
                     formatted_dstport = int(parsed_line[6])
+                    formatted_protocol = int(parsed_line[7])
 
-                    if parsed_line[7] == '6':
-                        protocol_keyword = 'tcp'
-                    elif parsed_line[7] == '17':
-                        protocol_keyword = 'udp'
+                    if formatted_protocol in protocol_map:
+                        protocol_keyword = protocol_map[formatted_protocol]
 
                     parsed_log.append((formatted_dstport, protocol_keyword))
-        
+    
         return parsed_log
 
     except FileNotFoundError:
@@ -68,7 +86,7 @@ def get_lookup_table(lookup_table_file):
     lookup_table = {}
 
     try: 
-        if ascii_check(lookup_table_file) == False:
+        if ascii_check(lookup_table_file) is False:
             return(f'{lookup_table_file} is not in plain text ascii format')
 
         with open(lookup_table_file, 'r') as file:
@@ -156,6 +174,8 @@ def get_output_file(tag_counts, combination_counts):
         
         print("Successfully printed output file.")
 
-tag_counts = get_tag_counts(get_parsed_log('input_files/input.txt'), get_lookup_table('input_files/lookup_table.txt'))
-combination_counts = get_combination_counts(get_parsed_log('input_files/input.txt'))
+tag_counts = get_tag_counts(get_parsed_log('input_files/input.txt', get_protocol_map('input_files/protocols.txt')), get_lookup_table('input_files/lookup_table.txt'))
+combination_counts = get_combination_counts(get_parsed_log('input_files/input.txt', get_protocol_map('input_files/protocols.txt')))
 get_output_file(tag_counts, combination_counts)
+
+# get_parsed_log('input_files/input.txt', get_protocol_map('input_files/protocols.txt'))

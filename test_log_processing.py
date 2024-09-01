@@ -2,7 +2,9 @@ import unittest
 import os
 import csv
 import textwrap
-from flow_log_parser import get_parsed_log, get_lookup_table, get_tag_counts, get_combination_counts, get_output_file
+from flow_log_parser import get_protocol_map, get_parsed_log, get_lookup_table, get_tag_counts, get_combination_counts
+
+# get_parsed_log('input_files/input.txt', get_protocol_map('input_files/protocols.txt'))
 
 class TestLogProcessing(unittest.TestCase):
 
@@ -32,7 +34,7 @@ class TestLogProcessing(unittest.TestCase):
             os.remove('output.txt')
 
     def test_get_parsed_log(self):
-        result = get_parsed_log('test_flow_log.txt')
+        result = get_parsed_log('test_flow_log.txt', get_protocol_map('input_files/protocols.txt'))
         expected = [
             (49153, 'tcp'), (49154, 'tcp'), (49155, 'tcp'), (80, 'tcp')
         ]
@@ -46,7 +48,7 @@ class TestLogProcessing(unittest.TestCase):
         self.assertCountEqual(result, expected)
 
     def test_get_tag_counts(self):
-        parsed_log = get_parsed_log('test_flow_log.txt')
+        parsed_log = get_parsed_log('test_flow_log.txt', get_protocol_map('input_files/protocols.txt'))
         lookup_table = get_lookup_table('test_lookup_table.txt')
         result = get_tag_counts(parsed_log, lookup_table)
         expected = {
@@ -55,7 +57,7 @@ class TestLogProcessing(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_get_combination_counts(self):
-        parsed_log = get_parsed_log('test_flow_log.txt')
+        parsed_log = get_parsed_log('test_flow_log.txt', get_protocol_map('input_files/protocols.txt'))
         result = get_combination_counts(parsed_log)
         expected = [
             [49153, 'tcp', 1], [49154, 'tcp', 1], [49155, 'tcp', 1], [80, 'tcp', 1]
@@ -63,14 +65,14 @@ class TestLogProcessing(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_invalid_log_file(self):
-        result = get_parsed_log('input_files/test_txt_file.txt')
+        result = get_parsed_log('input_files/test_txt_file.txt', get_protocol_map('input_files/protocols.txt'))
 
         expected = 'Cannot use flow file because the size is: 11.000000 MB, which is greater than 10 MB'
 
         self.assertEqual(result, expected)
 
     def test_missing_log_file(self):
-        result = get_parsed_log('missing.txt')
+        result = get_parsed_log('missing.txt', get_protocol_map('input_files/protocols.txt'))
 
         expected = 'File missing.txt not found'
 
@@ -84,7 +86,7 @@ class TestLogProcessing(unittest.TestCase):
         self.assertEqual(result, expected)
 
     def test_ascii_check_log(self):
-        result = get_parsed_log('input_files/ascii.txt')
+        result = get_parsed_log('input_files/ascii.txt', get_protocol_map('input_files/protocols.txt'))
 
         expected = 'input_files/ascii.txt is not in plain text ascii format'
 
