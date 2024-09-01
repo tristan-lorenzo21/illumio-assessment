@@ -8,7 +8,7 @@ def generate_random_log():
     src_addr = f"10.0.{random.randint(0, 255)}.{random.randint(1, 254)}"
     dst_addr = f"198.51.100.{random.randint(1, 254)}"
     src_port = random.randint(1, 65535)
-    dst_port = random.randint(1, 65535)
+    dst_port = random.randint(1, 5)
     protocol = random.randint(1, 255) 
     packets = random.randint(1, 1000)
     bytes_transferred = random.randint(1000, 100000)
@@ -28,4 +28,4 @@ def print_logs(lines):
         for _ in range(lines):
             file.write(generate_random_log() + '\n')
 
-print_logs(10000)
+print_logs(20000)
