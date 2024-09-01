@@ -7,7 +7,7 @@ Developed a script that parses through a flow log file that maps each row to a t
 * The input flow log file is properly formatted (i.e. only version 2 format will be inputted, and no additional spaces/tabs included)
 * The lookup table file is properly formatted (i.e. follows the following csv format: dstport,protocol,tag, and no additional spaces/tabs included)
 
-### Dependencies
+## Dependencies
 
 * Ran on Python version - 3.10.4
 * Used the following Python standard libraries
@@ -16,7 +16,7 @@ Developed a script that parses through a flow log file that maps each row to a t
   - csv
   - textwrap
   
-### Installation Instructions
+## Installation Instructions
 
 * How/where to download your program
 * Any modifications needed to be made to files/folders
@@ -34,7 +34,7 @@ Developed a script that parses through a flow log file that maps each row to a t
       ```
       cd illumio-assessment
       ```
-### Executing program (Must have completed the `Installing` portion of the README before going to this step)
+## Executing program (Must have completed the `Installing` portion of the README before going to this step)
 
 * ### On Windows
   * First, open your command prompt or Powershell
@@ -60,7 +60,7 @@ Developed a script that parses through a flow log file that maps each row to a t
     ```
   * The output file will be located inside the `output_files` folder with the name `output.txt`
     
-### Unit Tests using the `unittest` standard library
+## Unit Tests using the `unittest` standard library
 
 * All 9 unit tests passed, and a brief description of what each unit test is testing is included below
 1. `test_get_parsed_log`
