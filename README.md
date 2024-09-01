@@ -81,4 +81,6 @@ Developed a script that parses through a flow log file that maps each row to a t
     * Description: Ensures get_parsed_log detects non-ASCII files.
 9. `test_ascii_check_lookup_table`
     * Description: Ensures get_lookup_table detects non-ASCII files.
+10. `test_protocol_map`
+    * Description: Ensures that the protocol map is what is expected.
 
