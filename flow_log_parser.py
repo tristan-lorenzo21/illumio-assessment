@@ -64,6 +64,8 @@ def get_parsed_log(input_file, protocol_map):
 
                     if formatted_protocol in protocol_map:
                         protocol_keyword = protocol_map[formatted_protocol]
+                    else:
+                        protocol_keyword = 'unassigned'
 
                     parsed_log.append((formatted_dstport, protocol_keyword))
     
@@ -154,7 +156,7 @@ def get_output_file(tag_counts, combination_counts):
     outputs the results into a txt file.
     """
 
-    if len(tag_counts) <= 1 or combination_counts is None:
+    if len(tag_counts) < 1 or combination_counts is None:
         print('The flow log or lookup table file is invalid. Please try again with valid files. - get_output_file')
     else:
         with open('output_files/output.txt', 'w') as file:
